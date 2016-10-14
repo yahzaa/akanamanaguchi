@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hackerearth.www.sprintchat.ChatBox">
+    tools:context="com.hackerearth.www.sprintchat.ChatActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,13 +36,13 @@
         </ImageButton>
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/message_history"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/messages_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

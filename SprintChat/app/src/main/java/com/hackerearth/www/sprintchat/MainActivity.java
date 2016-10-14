@@ -20,6 +20,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.HttpURLConnection;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private FetchHackathonList _FetchHackathonList;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 finally{
                     urlConnection.disconnect();
                 }
+
             }
             catch(Exception e) {
                 Log.e("ERROR", e.getMessage(), e);
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     hackathon_button.setText(event.get("event_name").toString());
                     hackathon_button.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
-                            Intent intent = new Intent(MainActivity.this, ChatBox.class);
+                            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
                             startActivity(intent);
                         }
                     });
