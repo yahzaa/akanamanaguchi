@@ -88,10 +88,12 @@ public class MainActivity extends AppCompatActivity {
                     int position = event_list_length - i - 1;
                     JSONObject event = new JSONObject(event_list.get(position).toString());
                     Button hackathon_button = new Button(MainActivity.this, null, R.attr.borderlessButtonStyle);
+                    final String eventSlug = event.get("event_slug").toString();
                     hackathon_button.setText(event.get("event_name").toString());
                     hackathon_button.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                            intent.putExtra("roomName", eventSlug);
                             startActivity(intent);
                         }
                     });

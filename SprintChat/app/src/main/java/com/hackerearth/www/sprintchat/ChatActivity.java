@@ -33,14 +33,19 @@ public class ChatActivity extends AppCompatActivity {
 
     private FirebaseRecyclerAdapter mAdapter;
     private DatabaseReference ref;
-    private String username = "ck";
-    private String roomName = "room1";
     private List<Message> mMessages = new ArrayList<>();
+    private String username = "ck";
+    private String roomName = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_box);
+
+        Bundle gt = getIntent().getExtras();
+        roomName = gt.getString("roomName");
+        //username = gt.getString("username");
 
         ref = FirebaseDatabase.getInstance().getReference();
 
