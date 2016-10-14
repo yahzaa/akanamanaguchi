@@ -75,13 +75,17 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 JSONObject obj = new JSONObject(result);
+
+                String username = obj.getString("username");
+                setTitle(username);
+
                 JSONArray event_list = new JSONArray(obj.getString("event_list"));
 
                 int event_list_length = event_list.length();
                 for(int i = 0;i < event_list_length;i++){
                     int position = event_list_length - i - 1;
                     JSONObject event = new JSONObject(event_list.get(position).toString());
-                    Button hackathon_button = new Button(MainActivity.this);
+                    Button hackathon_button = new Button(MainActivity.this, null, R.attr.borderlessButtonStyle);
                     hackathon_button.setText(event.get("event_name").toString());
                     hackathon_button.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
