@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class ChatBox extends AppCompatActivity {
 
         message = (EditText) findViewById(R.id.message_text);
 
-        final Button send_button = (Button) findViewById(R.id.send_button);
+        final ImageButton send_button = (ImageButton) findViewById(R.id.send_button);
         send_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String msg_text = message.getText().toString();
