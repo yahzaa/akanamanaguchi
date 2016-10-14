@@ -31,7 +31,8 @@
             android:layout_height="wrap_content"
             android:cropToPadding="false"
             android:paddingLeft="10dp"
-            android:src="@drawable/eye">
+            android:background="@null"
+            android:src="@drawable/send_button">
         </ImageButton>
     </LinearLayout>
 
