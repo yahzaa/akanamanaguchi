@@ -10,8 +10,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.hackerearth.www.sprintchat.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/wrapper"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/open_chat"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Hackathon 1" />
+    </LinearLayout>
 </RelativeLayout>
