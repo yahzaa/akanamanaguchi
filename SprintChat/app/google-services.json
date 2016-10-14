@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "716697135144",
+    "firebase_url": "https://sprint-chat.firebaseio.com",
+    "project_id": "sprint-chat",
+    "storage_bucket": "sprint-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716697135144:android:f49cca07021ce82e",
+        "android_client_info": {
+          "package_name": "com.hackerearth.www.sprintchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716697135144-3ng7t4tq6ugtirsollkj82reh3d9vc71.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_P422rFYJ6scf_m56qlQ2lB79YclnndE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
