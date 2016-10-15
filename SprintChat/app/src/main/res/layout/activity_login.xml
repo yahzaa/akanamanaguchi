@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:gravity='center'
         android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_weight="0.14"
+        android:layout_weight="0.04"
         android:maxLines="1"
         android:imeOptions="actionDone"
         android:hint="Enter User Name" >
@@ -27,10 +27,9 @@
     <Button
         android:id="@+id/submit_email"
         android:layout_width="match_parent"
-        android:layout_height="87dp"
+        android:layout_height="wrap_content"
         android:gravity='center'
         android:text='Proceed'
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_weight="0.01" />
+        android:layout_gravity="center_horizontal|center_vertical" />
 
 </LinearLayout>
