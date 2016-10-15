@@ -106,9 +106,11 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Message message = new Message(mMessage.getText().toString(), username);
-                ref.child("chats").child(roomName).push().setValue(message);
-                mMessage.setText("");
+                String message_text = mMessage.getText().toString();
+                if(message_text.length() > 0){
+                    Message message = new Message(message_text, username);
+                    ref.child("chats").child(roomName).push().setValue(message);
+                    mMessage.setText("");}
             }
         });
     }
