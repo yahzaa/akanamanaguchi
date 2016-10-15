@@ -34,7 +34,7 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseRecyclerAdapter mAdapter;
     private DatabaseReference ref;
     private List<Message> mMessages = new ArrayList<>();
-    private String username = "ck";
+    private String username = "";
     private String roomName = "";
 
 
@@ -43,9 +43,9 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_box);
 
-        Bundle gt = getIntent().getExtras();
-        roomName = gt.getString("roomName");
-        //username = gt.getString("username");
+        Bundle bucket = getIntent().getExtras();
+        roomName = bucket.getString("roomName");
+        username = bucket.getString("username");
 
         ref = FirebaseDatabase.getInstance().getReference();
 
@@ -56,16 +56,19 @@ public class ChatActivity extends AppCompatActivity {
         mAdapter = new FirebaseRecyclerAdapter<Message, ChatHolder>(
                 Message.class, android.R.layout.two_line_list_item, ChatHolder.class,
                 ref.child("chats").child(roomName)) {
+
             @Override
             public void populateViewHolder(ChatHolder chatViewHolder, Message message, int position) {
                 Message mMessage = mMessages.get(position);
                 chatViewHolder.setUsername(mMessage.getUsername());
-                chatViewHolder.setText(mMessage.getText());
+                chatViewHolder.setText(mMessage.getText() + "\n");
             }
         };
+
         recycler.setAdapter(mAdapter);
 
         ChildEventListener childEventListener = new ChildEventListener() {
+
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Message message = dataSnapshot.getValue(Message.class);
@@ -100,6 +103,7 @@ public class ChatActivity extends AppCompatActivity {
         // Send message
         final EditText mMessage = (EditText) findViewById(R.id.message_text);
         findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Message message = new Message(mMessage.getText().toString(), username);

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import org.json.JSONArray;
@@ -24,14 +25,17 @@ import java.net.HttpURLConnection;
 public class MainActivity extends AppCompatActivity {
 
     private FetchHackathonList _FetchHackathonList;
-    String hackathon_list_url = "https://devx-staging7-b40sd1.hackerearth.com/sprints/get-registered-events/apoorvasomani1994";
+    String hackathon_list_url = "https://devx-staging7-b40sd1.hackerearth.com/sprints/get-registered-events/";
+    String username = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String name = "";
+        Bundle basket = getIntent().getExtras();
+        username = basket.getString("username");
+
 
         _FetchHackathonList = new FetchHackathonList();
         _FetchHackathonList.execute();
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
             String response = "";
             try {
-                URL url = new URL(hackathon_list_url);
+                URL url = new URL(hackathon_list_url + username);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
                 try {
@@ -78,33 +82,40 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONObject obj = new JSONObject(result);
 
-                String username = obj.getString("username");
-                setTitle(username);
+                String error_msg = obj.getString("error_msg");
 
-                JSONArray event_list = new JSONArray(obj.getString("event_list"));
+                if(error_msg == "null") {
+                    JSONArray event_list = new JSONArray(obj.getString("event_list"));
+                    final String username = obj.getString("username");
+                    int event_list_length = event_list.length();
+                    for (int i = 0; i < event_list_length; i++) {
+                        int position = event_list_length - i - 1;
+                        JSONObject event = new JSONObject(event_list.get(position).toString());
+                        Button hackathon_button = new Button(MainActivity.this, null, R.attr.borderlessButtonStyle);
+                        final String eventSlug = event.get("event_slug").toString();
+                        hackathon_button.setText(event.get("event_name").toString());
+                        hackathon_button.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
+                                Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                                intent.putExtra("roomName", eventSlug);
+                                intent.putExtra("username", username);
+                                startActivity(intent);
+                            }
+                        });
+                        hackathon_list.addView(hackathon_button, layout_params);
+                    }
 
-                int event_list_length = event_list.length();
-                for(int i = 0;i < event_list_length;i++){
-                    int position = event_list_length - i - 1;
-                    JSONObject event = new JSONObject(event_list.get(position).toString());
-                    Button hackathon_button = new Button(MainActivity.this, null, R.attr.borderlessButtonStyle);
-                    final String eventSlug = event.get("event_slug").toString();
-                    hackathon_button.setText(event.get("event_name").toString());
-                    hackathon_button.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
-                            intent.putExtra("roomName", eventSlug);
-                            startActivity(intent);
-                        }
-                    });
-                    hackathon_list.addView(hackathon_button, layout_params);
+                }
+                else {
+                    EditText error_label = new EditText(MainActivity.this);
+                    error_label.setText(error_msg);
+                    error_label.setKeyListener(null);
+                    hackathon_list.addView(error_label, layout_params);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-
-
     }
 }
 
