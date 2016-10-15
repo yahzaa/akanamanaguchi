@@ -21,11 +21,13 @@ public class Login extends AppCompatActivity {
 
         submit_email.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String w = username.getText().toString();
+                String name = username.getText().toString();
 
-                Intent intent = new Intent(Login.this, MainActivity.class);
-                intent.putExtra("username", username.getText().toString());
-                startActivity(intent);
+                if(name.length() > 0) {
+                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    intent.putExtra("username", name);
+                    startActivity(intent);
+                }
             }
         });
     }
